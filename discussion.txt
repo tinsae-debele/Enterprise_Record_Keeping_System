@@ -1,0 +1,111 @@
+Enterprise Record Keeping System (using Message Queues)
+Tinsae
+----------------------------------
+
+Please: Enter Operation you wanna proform [Operation] :insert
+
+Please Enter number of Employees You wanna ADD : 3
+
+Enter details of employees 1: 
+*******************************************************
+Enter Employee's name[Frist_Last]: John
+Enter employee Number: 101020
+Enter Departments[use _ as speace] : Comp
+Enter salary: 3000
+*******************************************************
+
+Enter details of employees 2: 
+*******************************************************
+Enter Employee's name[Frist_Last]: Ali
+Enter employee Number: 101030
+Enter Departments[use _ as speace] : Mech
+Enter salary: 2500
+*******************************************************
+
+Enter details of employees 3: 
+*******************************************************
+Enter Employee's name[Frist_Last]: Chris 
+Enter employee Number: 101040
+Enter Departments[use _ as speace] : Bio
+Enter salary: 2000
+*******************************************************
+
+
+
+
+By following the instructions within the readme file, one can test the insert operation with a number of users.
+In our record keeper, we can verify our inputs that we had set in the admin console. In the test case used in the readme,
+the values recorded in the record keeper are correct.
+
+
+____________________________________________________________________________________________________________________________________________________
+Please: Enter Operation you wanna proform [Operation] :checkname
+Enter employee Number: 101030
+Command sent : CheckName
+
+****************Result************
+
+The Name of the employee is : Ali
+
+
+**********************************
+
+Please: Enter Operation you wanna proform [Operation] :
+
+
+Next, testing the "checkname" operation, we enter the record inserted previously, 101047124. In the record keeper (RK), we see that 
+it found the correct name that had been set to that employee number it returned the correct name, Jorge_Fernandez, to the administrator./
+
+
+__________________________________________________________________________________________________________________________________________________
+Please: Enter Operation you wanna proform [Operation] :checkdep
+Enter employee Number: 101040
+Command sent : CheckDep
+
+****************Result************
+
+Department of the employee is : Bio
+
+
+**********************************
+
+Please: Enter Operation you wanna proform [Operation] :
+
+Testing the "checkdep" for checking the department the employee is in, yielded similar results. By entering 101047124, the record keeper
+finds the correct department that had been entered by the insert earlier, which is "School".
+
+____________________________________________________________________________________________________________________________________________________
+Please: Enter Operation you wanna proform [Operation] :checksalary
+Check Salary: Enter employee Number: 101030
+
+****************Result************
+
+The Salary of the employee is : 2500
+
+
+**********************************
+
+Please: Enter Operation you wanna proform [Operation] :
+
+
+Again, testing the "checksalary" operation returned the correct salary that had been inserted, with proper display
+of the command in the RK.
+_______________________________________________________________________________________________________________________________________________________
+
+Similarly for "empNum", the correct employee number is returned after the name is queried. Valid commands are also seen
+in the RK.
+
+The "check" operation also returns a correct list of employee numbers in that department. This was tested with a single, and three employees
+in the department. The RK works correctly and returns all employee numbers to that dep.
+
+Lastly, the "delete" operation validly deletes the record that is queried for deletion. RK returns the correct value
+when deleted.
+
+Next, operations were tested with invalid names/numbers. This resulted in the RK not being able to return valid results,
+and the administrator console would not be able to leave that operation, forcing the user to restart the admin program.
+Similarly with duplicate records of employees with either duplicate names/numbers would cause the RK to insert values in incorrect spots.
+For example, with a duplicate employee number, the salary had gone to the name, and the employee number would have gone to the salary in the RK.
+
+In conclusion, the program works perfectly, as long as valid inputs are given to the administrator, and there are no duplicate names or employee
+numbers given to the RK. That being said, the program complies with the specifications given within the assignment.
+

@@ -1,0 +1,144 @@
+--------------------------------------
+Enterprise Record Keeping System (using Message Queues)
+Authors: Tinsae Debele [101034827]  and Jorge Fernandez [101047124]
+--------------------------------------
+int main()
+{
+    int running = 1;
+    int msgid;
+    int msgid1;
+    struct empInfo indvInf[100];
+    struct my_msg_st some_data;
+    long int msg_to_receive = 0;
+    long int cmd_to_receive = 0;
+    char cmd2[BUFSIZ] = "";
+    struct my_cmd comand;
+    //****************************************************
+
+    /**-------------------------------------------------*/
+    msgid1 = msgget((key_t)4231, 0666 | IPC_CREAT);
+    if (msgid1 == -1)
+    {
+        fprintf(stderr, "msgget failed with error: %d\n", errno);
+        exit(EXIT_FAILURE);
+    }
+    /* First, we set up the message queue. */
+    msgid = msgget((key_t)1234, 0666 | IPC_CREAT);
+
+    /* Then the messages are retrieved from the queue, until an end message is encountered.
+     Lastly, the message queue is deleted. */
+    int i = 0;
+    int j = 0;
+
+    while (running)
+    {
+
+        if (msgrcv(msgid1, (void *)&comand, BUFSIZ,
+                   cmd_to_receive, 0) == -1)
+        {
+            fprintf(stderr, "msgrcv failed with error 1 : %d\n", errno);
+            exit(EXIT_FAILURE);
+        }
+
+        if (strncmp(comand.cmd, "Insert", 6) == 0)
+        {
+            switch (i)
+            {
+            case 0:
+                if (msgrcv(msgid, (void *)&some_data, BUFSIZ,
+                           msg_to_receive, 0) == -1)
+                {
+                    fprintf(stderr, "msgrcv failed with error 2: %d\n", errno);
+                    exit(EXIT_FAILURE);
+                }
+
+                strcpy(indvInf[j].empName, some_data.some_text);
+                printf("Employee Name %d %d: %s \n", i, j, indvInf[j].empName);
+                break;
+            case 1:
+                if (msgrcv(msgid, (void *)&some_data, BUFSIZ,
+                           msg_to_receive, 0) == -1)
+                { //error
+                }
+
+              
+                break;
+            case 2:
+                if (msgrcv(msgid, (void *)&some_data, BUFSIZ,
+                           msg_to_receive, 0) == -1)
+                {
+  }
+
+               
+            case 3:
+                //Resiving case threee
+                i = -1;
+                break;
+            }
+
+            i++;
+            if (strncmp(some_data.some_text, "end", 3) == 0)
+            {
+                running = 0;
+            }
+        }
+        else if (strncmp(comand.cmd, "CheckName", 9) == 0)
+        {
+
+        }
+        else if (strncmp(comand.cmd, "CheckDep", 8) == 0)
+        {
+            
+         //Executing command - Check_department
+            
+                }
+            }
+        }
+        else if (strncmp(comand.cmd, "CheckSalary", 11) == 0)
+        {
+           Executing command - Check_salary
+
+                }
+            }
+        }
+        else if (strncmp(comand.cmd, "CheckEmpNum", 11) == 0)
+        {
+            
+            }
+        }
+        else if (strncmp(comand.cmd, "Check", 5) == 0)
+        {
+             //Check_employee_number
+            int cnt;
+    
+                    printf("Result Sent\n");
+                }
+            }
+        }
+        else if (strncmp(comand.cmd, "Delete", 6) == 0)                                               
+        {  
+               secitonon for exicuting Delelet             
+                    printf("Result Sent\n");
+                }
+            }
+        }
+        else
+        {
+            strcpy(comand.cmd, cmd2);
+        }
+    }
+
+    if (msgctl(msgid, IPC_RMID, 0) == -1)
+    {
+        fprintf(stderr, "msgctl(IPC_RMID) failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (msgctl(msgid1, IPC_RMID, 0) == -1)
+    {
+        fprintf(stderr, "msgctl(IPC_RMID) failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    exit(EXIT_SUCCESS);
+}
